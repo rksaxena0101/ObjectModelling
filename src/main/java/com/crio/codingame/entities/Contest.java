@@ -14,9 +14,7 @@ public class Contest extends BaseEntity{
     private final User creator;
     private ContestStatus contestStatus;
 
-
-    public Contest(String name, List<Question> questions, Level level, User creator,
-            ContestStatus contestStatus) {
+    public Contest(String name, List<Question> questions, Level level, User creator, ContestStatus contestStatus) {
         this.name = name;
         this.questions = new ArrayList<>();
         validateQuestionList(questions, level);
@@ -31,11 +29,11 @@ public class Contest extends BaseEntity{
     //  1. There can be few unused imports, you will need to fix them to make the build pass.
     //  2. You can use "./gradlew build" to check if your code builds successfully.
 
-    private void validateQuestionList(List<Question> qList, Level contestLevel) throws InvalidContestException {
+    private void validateQuestionList(List<Question> qList, Level contestLevel) {
+        for(Question questions: qList) 
+            if(questions.getLevel() == contestLevel) throw new InvalidContestException();
     }
 
-
-    
     public String getName() {
         return name;
     }

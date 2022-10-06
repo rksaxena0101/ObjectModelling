@@ -44,7 +44,6 @@ public class User extends BaseEntity {
         return result;
     }
 
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -66,8 +65,6 @@ public class User extends BaseEntity {
     public String toString() {
         return "User [id=" + id + ", contests=" + contests + ", name=" + name + ", score=" + score + "]";
     }
-    
-    
-    
+        
 }
 
