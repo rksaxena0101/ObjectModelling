@@ -1,7 +1,7 @@
 
 package com.crio.codingame.entities;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,9 +14,20 @@ public class Contest extends BaseEntity{
     private final User creator;
     private ContestStatus contestStatus;
 
-    public Contest(String name, List<Question> questions, Level level, User creator, ContestStatus contestStatus) {
+    public Contest(Contest contest){
+        this(contest.id,contest.name,contest.questions,contest.level,contest.creator,contest.contestStatus);
+    }
+
+    public Contest(String id, String name, List<Question> questions, Level level, User creator,
+            ContestStatus contestStatus) {
+        this(name,questions,level,creator,contestStatus);
+        this.id = id;
+    }
+
+    public Contest(String name, List<Question> questions, Level level, User creator,
+            ContestStatus contestStatus) {
         this.name = name;
-        this.questions = new ArrayList<>();
+        this.questions = questions;
         validateQuestionList(questions, level);
         this.level = level;
         this.creator = creator;
@@ -29,11 +40,18 @@ public class Contest extends BaseEntity{
     //  1. There can be few unused imports, you will need to fix them to make the build pass.
     //  2. You can use "./gradlew build" to check if your code builds successfully.
 
-    private void validateQuestionList(List<Question> qList, Level contestLevel) {
+    private void validateQuestionList(List<Question> qList, Level contestLevel) throws InvalidContestException{
         for(Question questions: qList) 
-            if(questions.getLevel() == contestLevel) throw new InvalidContestException();
+            if(!(questions.getLevel() == contestLevel)) throw new InvalidContestException();
     }
 
+    // TODO: CRIO_TASK_MODULE_SERVICES
+    // Change the Contest Status to ENDED
+
+    public void endContest(){
+        this.contestStatus = contestStatus.ENDED;
+    }
+    
     public String getName() {
         return name;
     }
@@ -78,7 +96,6 @@ public class Contest extends BaseEntity{
             return false;
         return true;
     }
-
 
     @Override
     public String toString() {
