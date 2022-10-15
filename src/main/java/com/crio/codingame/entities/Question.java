@@ -1,4 +1,3 @@
-
 package com.crio.codingame.entities;
 
 public class Question extends BaseEntity {

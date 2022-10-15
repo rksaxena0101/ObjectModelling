@@ -6,7 +6,6 @@ import com.crio.codingame.entities.Question;
 import com.crio.codingame.repositories.IQuestionRepository;
 
 public class QuestionService implements IQuestionService{
-
     private final IQuestionRepository questionRepository;
 
     public QuestionService(IQuestionRepository questionRepository) {

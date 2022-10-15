@@ -40,7 +40,8 @@ public class ContestService implements IContestService {
         final User user = userRepository.findByName(contestCreator).orElseThrow(() -> new UserNotFoundException("Cannot Create Contest. Contest Creator for given name: " + contestCreator + " not found!"));
         final List<Question> questions = questionRepository.findAllQuestionLevelWise(level);
         if(questions.isEmpty()){
-            throw new QuestionNotFoundException("Cannot create Contest. Enough number of questions can not found. Please try again later!");
+            //throw new QuestionNotFoundException("Cannot create Contest. Enough number of questions can not found. Please try again later!");
+            throw new QuestionNotFoundException("Request cannot be processed as enough number of questions can not found. Please try again later!");
         }
         if(numQuestion == null || numQuestion == 0 || questions.size() <= numQuestion){
             Contest contest = contestRepository.save(new Contest(contestName, questions,level,user,ContestStatus.NOT_STARTED));
